@@ -21,7 +21,6 @@ import java.util.Set;
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ReadOnlyProperty
     private Integer id_autor;
     private String nombre;
     private String apellido;

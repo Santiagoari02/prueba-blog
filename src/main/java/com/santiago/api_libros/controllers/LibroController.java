@@ -1,5 +1,7 @@
 package com.santiago.api_libros.controllers;
 
+import com.santiago.api_libros.dtos.LibroRequestDto;
+import com.santiago.api_libros.dtos.LibroResponseDto;
 import com.santiago.api_libros.entities.Libro;
 import com.santiago.api_libros.services.LibroService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,18 +30,18 @@ public class LibroController {
     @ApiResponse(responseCode = "404", description = "Autor no encontrado.")
     @PostMapping("/{idAutor}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Libro save(@RequestBody Libro libro, @Parameter(description = "El ID del autor a asignar", example = "1") @PathVariable Integer idAutor){
-      return libroService.crearLibro(libro, idAutor);
+    public LibroResponseDto save(@RequestBody LibroRequestDto libroRequest, @Parameter(description = "El ID del autor a asignar", example = "1") @PathVariable Integer idAutor){
+      return libroService.crearLibro(libroRequest, idAutor);
     };
 
     @GetMapping
-    public List<Libro> findAll(){
-        return libroService.findAll();
+    public List<LibroResponseDto> findAll(){
+        return libroService.findAllLibros();
     }
 
     @GetMapping("/{id}")
-    public Libro findById(@PathVariable Integer id){
-        return libroService.findById(id);
+    public LibroResponseDto findById(@PathVariable Integer id){
+        return libroService.findLibroById(id);
     }
 
     @DeleteMapping("/{id}")
@@ -48,9 +50,7 @@ public class LibroController {
     }
 
     @PutMapping("/{idLibro}")
-    public Libro updateLibro(@RequestBody Libro libro, @PathVariable Integer idLibro){
-      Libro libroDb = libroService.findById(idLibro);
-      libroDb.setTitulo(libro.getTitulo());
-      return libroService.update(libroDb);
+    public LibroResponseDto update(@RequestBody LibroRequestDto libroRequest, @PathVariable Integer idLibro){
+      return libroService.update(libroRequest, idLibro);
     }
 }

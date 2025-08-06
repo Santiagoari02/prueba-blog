@@ -1,5 +1,7 @@
 package com.santiago.api_libros.services;
 
+import com.santiago.api_libros.dtos.LibroRequestDto;
+import com.santiago.api_libros.dtos.LibroResponseDto;
 import com.santiago.api_libros.entities.Autor;
 import com.santiago.api_libros.entities.Libro;
 
@@ -10,6 +12,8 @@ public interface LibroService {
     List<Libro> findAll();
     Libro findById(Integer id);
     void deleteById(Integer id);
-    Libro update(Libro libro);
-    Libro crearLibro(Libro libro, Integer idAutor);
+    LibroResponseDto update(LibroRequestDto libroRequest, Integer idLibro);
+    LibroResponseDto crearLibro(LibroRequestDto libroRequest, Integer idAutor);
+    LibroResponseDto findLibroById(Integer id);
+    List<LibroResponseDto> findAllLibros();
 }

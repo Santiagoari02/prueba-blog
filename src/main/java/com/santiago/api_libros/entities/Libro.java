@@ -28,6 +28,5 @@ public class Libro {
     private LocalDate fecha_de_publicacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_autor")
-    @JsonIgnore
     private Autor autor;
 }
